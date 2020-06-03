@@ -1,8 +1,10 @@
-import java.io.File;
+import java.io.*;
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class User2 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+
 
         File f = new File("C:\\Users\\Adrian\\Desktop\\plik.txt");
         if (!f.exists()) {
@@ -14,16 +16,31 @@ public class User2 {
             }
         }
 
+        Thread ob1 = new Thread(new Odczyt());
+        ob1.start();
+        ob1.join();
 
-            try {
-                Scanner sf = new Scanner(f);
-                System.out.println("\nCZAT: ");
-                while (sf.hasNextLine()) {
-                    System.out.println(sf.nextLine());
+
+        while(true) {
+            if (f.canWrite()) {
+                try {
+
+                    FileWriter fw = new FileWriter(f, true);
+                    Formatter fm = new Formatter(fw);
+
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("Użytkownik 2: ");
+
+
+                    String tekst ="Użytkownik 2: " + sc.nextLine();
+                    fm.format("%s \r\n", tekst);
+                    fm.close();
+                    fw.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
+        }
     }
 }
 
