@@ -4,7 +4,7 @@ import java.util.Formatter;
 import java.util.Scanner;
 
 public class User1 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
 
         File f = new File("C:\\Users\\Adrian\\Desktop\\plik.txt");
@@ -17,6 +17,9 @@ public class User1 {
             }
         }
 
+        Thread ob1 = new Thread(new Odczyt());
+        ob1.start();
+        ob1.join();
 
         while(true) {
             if (f.canWrite()) {
@@ -36,17 +39,6 @@ public class User1 {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-            }
-
-            try {
-                Scanner sf = new Scanner(f);
-                System.out.println("\nCZAT: ");
-                while (sf.hasNextLine()) {
-                    System.out.println(sf.nextLine());
-
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
         }
     }
