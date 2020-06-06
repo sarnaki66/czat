@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.Formatter;
 import java.util.Scanner;
 
@@ -17,9 +16,10 @@ public class User1 {
             }
         }
 
+        Odczyt odczyt = new Odczyt();
         Thread ob1 = new Thread(new Odczyt());
         ob1.start();
-        ob1.join();
+        odczyt.zatrzymaj = true;
 
         while(true) {
             if (f.canWrite()) {
@@ -40,6 +40,10 @@ public class User1 {
                     System.out.println(e.getMessage());
                 }
             }
+
+
+
         }
     }
 }
+
