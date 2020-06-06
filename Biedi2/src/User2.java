@@ -16,9 +16,12 @@ public class User2 {
             }
         }
 
+
+        Odczyt odczyt = new Odczyt();
         Thread ob1 = new Thread(new Odczyt());
         ob1.start();
-        ob1.join();
+        odczyt.zatrzymaj = true;
+
 
 
         while(true) {
@@ -41,6 +44,7 @@ public class User2 {
                 }
             }
         }
+
     }
 }
 

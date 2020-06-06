@@ -6,6 +6,10 @@ import java.io.IOException;
 
 public class Odczyt implements Runnable {
 
+
+    public boolean zatrzymaj = false;
+    String line;
+
     @Override
     public void run() {
         File file = new File("C:\\Users\\Adrian\\Desktop\\plik.txt");
@@ -13,19 +17,27 @@ public class Odczyt implements Runnable {
         BufferedReader br = null;
 
     try {
+
         FileReader fr = new FileReader(file);
         br = new BufferedReader(fr);
 
-        String line;
+        while (!zatrzymaj) {
 
-        while ((line = br.readLine()) != null && !line.equals("exit")) {
-            System.out.println(line);
+                line = br.readLine();
+                if (line != null) {
+                    System.out.println(line);
+                }
+                Thread.sleep(100);
+
         }
+
 
     } catch (FileNotFoundException e) {
         System.out.println("File not found: " + file.toString());
     } catch (IOException e) {
         System.out.println("Unable to read file: " + file.toString());
+    } catch (InterruptedException e) {
+        e.printStackTrace();
     } finally {
         try {
             br.close();
